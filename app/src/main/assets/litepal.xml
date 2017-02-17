@@ -1,0 +1,9 @@
+<litepal>
+    <dbname value="cool_weather"/>
+    <versin value="1"/>
+    <list>
+        <mapping class="om.coolweather.android.db.Province"/>
+        <mapping class="om.coolweather.android.db.City"/>
+        <mapping class="om.coolweather.android.db.County"/>
+    </list>
+</litepal>
