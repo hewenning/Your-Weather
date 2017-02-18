@@ -11,28 +11,34 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 public class Utility {
-    //解析和处理服务器返回的省级数据
-    public static boolean handleProvinceResponse(String response){
-        if (!TextUtils.isEmpty(response)){
-            try{
-                JSONArray allProvinces =new JSONArray(response);
-                for (int i=0;i<allProvinces.length();i++){
-                    JSONObject provinceObject=allProvinces.getJSONObject(i);
-                    Province province=new Province();
+
+    /**
+     * 解析和处理服务器返回的省级数据
+     */
+    public static boolean handleProvinceResponse(String response) {
+        if (!TextUtils.isEmpty(response)) {
+            try {
+                JSONArray allProvinces = new JSONArray(response);
+                for (int i = 0; i < allProvinces.length(); i++) {
+                    JSONObject provinceObject = allProvinces.getJSONObject(i);
+                    Province province = new Province();
                     province.setProvinceName(provinceObject.getString("name"));
                     province.setProvinceCode(provinceObject.getInt("id"));
                     province.save();
                 }
                 return true;
-            }
-            catch (JSONException e){
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
         return false;
     }
-    //解析和处理服务器返回的市级数据
+
+    /**
+     * 解析和处理服务器返回的市级数据
+     */
     public static boolean handleCityResponse(String response, int provinceId) {
         if (!TextUtils.isEmpty(response)) {
             try {
@@ -52,7 +58,10 @@ public class Utility {
         }
         return false;
     }
-    //解析和处理服务器的县级数据
+
+    /**
+     * 解析和处理服务器返回的县级数据
+     */
     public static boolean handleCountyResponse(String response, int cityId) {
         if (!TextUtils.isEmpty(response)) {
             try {
@@ -72,7 +81,10 @@ public class Utility {
         }
         return false;
     }
-    //将返回的JSON数据解析成Weather实体类
+
+    /**
+     * 将返回的JSON数据解析成Weather实体类
+     */
     public static Weather handleWeatherResponse(String response) {
         try {
             JSONObject jsonObject = new JSONObject(response);
@@ -84,4 +96,5 @@ public class Utility {
         }
         return null;
     }
+
 }
